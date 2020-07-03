@@ -1,3 +1,4 @@
+//classe main onde roda a aplicação
 package com.example.cursomc;
 
 

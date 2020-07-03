@@ -1,3 +1,4 @@
+//classe de domínio categoria
 package com.example.cursomc.domain;
 
 import java.io.Serializable;
