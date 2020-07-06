@@ -1,3 +1,4 @@
+//Exceção personalizada a ser retornada em JSON
 package com.example.cursomc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {

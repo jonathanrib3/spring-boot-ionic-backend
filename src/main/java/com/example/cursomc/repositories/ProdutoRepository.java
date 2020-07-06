@@ -1,3 +1,4 @@
+//Responsável pela camada de acesso a dados da tabela produto
 package com.example.cursomc.repositories;
 
 import com.example.cursomc.domain.Produto;

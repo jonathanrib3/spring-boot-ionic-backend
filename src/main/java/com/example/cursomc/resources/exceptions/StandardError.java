@@ -1,3 +1,4 @@
+//objeto auxiliar que possui o status, mensagem e tempo do erro em milissegundos
 package com.example.cursomc.resources.exceptions;
 
 import java.io.Serializable;

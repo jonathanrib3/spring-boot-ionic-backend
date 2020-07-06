@@ -1,3 +1,4 @@
+//Responsável por mandar a info da exception pro controlador REST
 package com.example.cursomc.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
