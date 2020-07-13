@@ -29,10 +29,8 @@ public class Pedido implements Serializable  {
 	
 	//O id do pedido é o msm do pagamento. O relacionamento é 1 para 1
 	
-	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id" )
 	private Cliente cliente;
