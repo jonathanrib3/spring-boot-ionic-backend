@@ -49,8 +49,8 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.cpfOucnpj = cpfOucnpj;
-		this.tipo = tipo.getCod();
-	}
+		this.tipo = (tipo == null) ? null : tipo.getCod();
+	} 
 
 	@Override
 	public int hashCode() {
