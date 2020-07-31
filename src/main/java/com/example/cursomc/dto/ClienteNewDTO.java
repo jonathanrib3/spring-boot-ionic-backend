@@ -6,6 +6,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.example.cursomc.services.validations.ClienteInsert;
+
+@ClienteInsert 
 public class ClienteNewDTO implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	
@@ -16,7 +19,7 @@ public class ClienteNewDTO implements Serializable  {
 	@Email(message = "Formato de email inválido")
 	private String email;
 	@NotEmpty(message="Preenchimento obrigatório")
-	@Size(min =11, max = 16, message = "O tamanho do cpf deve ser de 16 caracteres numéricos" )
+	
 	private String cpfOucnpj;
 	
 	private Integer tipo;
