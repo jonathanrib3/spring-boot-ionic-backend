@@ -20,6 +20,7 @@ import com.example.cursomc.domain.PagamentoComCartao;
 import com.example.cursomc.domain.Pedido;
 import com.example.cursomc.domain.Produto;
 import com.example.cursomc.domain.enums.EstadoPagamento;
+import com.example.cursomc.domain.enums.Perfil;
 import com.example.cursomc.domain.enums.TipoCliente;
 import com.example.cursomc.repositories.CategoriaRepository;
 import com.example.cursomc.repositories.CidadeRepository;
@@ -114,26 +115,40 @@ public class DBService {
 		// //////////////////////////////////////////////
 		
 		Cliente cli1 = new Cliente(null, "Maria José", "jonathanrib.6@gmail.com", "3631245680", TipoCliente.PESSOAFISICA,pass.encode("123"));
+		Cliente cli2 = new Cliente(null, "Eugenio Brito", "teste@gmail.com", "35951757002", TipoCliente.PESSOAFISICA,pass.encode("123"));
+		cli1.addPerfil(Perfil.CLIENTE);
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.addPerfil(Perfil.CLIENTE);
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		cli2.getTelefones().addAll(Arrays.asList("27363325", "93838394"));
 		
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		Endereco e3 = new Endereco(null, "Rua José Cyrillo das Neves", "380", "Apto 302", "Taiaman", "38415180", cli2, c1);
+		Endereco e4 = new Endereco(null, "Rua Antônio Gomes Correa", "151", "Sala 008", "Jardim Catanduva", "05767310", cli2, c2);
 		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3,e4));
 		
-		clienteRepo.saveAll(Arrays.asList(cli1));
-		enderecoRepo.saveAll(Arrays.asList(e1,e2));
+		clienteRepo.saveAll(Arrays.asList(cli1,cli2));
+		//clienteRepo.saveAll(Arrays.asList(cli2));
+		enderecoRepo.saveAll(Arrays.asList(e1,e2,e3,e4));
 		
 		// //////////////////////////////////////////////
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido ped1 = new Pedido(null,sdf.parse("30/09/2017 10:32"), cli1, e1);
 		Pedido ped2 = new Pedido(null,sdf.parse("10/10/2017 19:35"), cli1, e2);
+		Pedido ped3 = new Pedido(null,sdf.parse("18/05/2017 18:07"), cli2, e3);
+		Pedido ped4 = new Pedido(null,sdf.parse("01/12/2017 10:01"), cli2, e4);
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pagto1);
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"),null);
+		Pagamento pagto3 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped3, 12);
+		Pagamento pagto4 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped4, 1);
 		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
-		pagamentoRepo.saveAll(Arrays.asList(pagto1,pagto2));
-		pedidoRepo.saveAll(Arrays.asList(ped1,ped2));
+		cli2.getPedidos().addAll(Arrays.asList(ped3,ped4));
+		pagamentoRepo.saveAll(Arrays.asList(pagto1,pagto2,pagto3,pagto4));
+		pedidoRepo.saveAll(Arrays.asList(ped1,ped2,ped3,ped4));
 		
 		// ////////////////////////////////////////////////
 		//Pedido pedido,Produto produto, double desconto, double preco, Integer quantidade
@@ -141,13 +156,18 @@ public class DBService {
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 00, 2000, 1);
 		ItemPedido ip2 = new ItemPedido(ped1, p3, 00, 80, 2);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 100, 800, 1);
+		ItemPedido ip4 = new ItemPedido(ped3, p1, 00, 2000, 1);
+		ItemPedido ip5 = new ItemPedido(ped4, p8, 50, 800, 3);
 		
 		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
+		ped3.getItens().addAll(Arrays.asList(ip4));
+		ped4.getItens().addAll(Arrays.asList(ip5));
 		p1.getItens().addAll(Arrays.asList(ip1));
 		p2.getItens().addAll(Arrays.asList(ip3));
 		p3.getItens().addAll(Arrays.asList(ip2));
+		p8.getItens().addAll(Arrays.asList(ip5));
 		
-		itensRepo.saveAll(Arrays.asList(ip1,ip2,ip3));
+		itensRepo.saveAll(Arrays.asList(ip1,ip2,ip3,ip4,ip5));
 	}
 }
